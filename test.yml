@@ -1,0 +1,25 @@
+---
+- name: setup webserver
+  hosts: [centos_server]
+  remote_user: root
+  become: yes
+
+
+  tasks:
+  - name: install httpd web server for Centos
+    yum:
+      name: httpd
+      state: present
+    
+
+  - name: start httpd
+    systemd:
+      name: httpd
+      state: started
+      enabled: yes
+    
+  - name: copy git repo to apache default webpage
+    copy:
+      src: /home/vagrant/wp-pusher/
+      dest: /var/www/html/
+      remote_src: yes

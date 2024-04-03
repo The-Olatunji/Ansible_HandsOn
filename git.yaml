@@ -1,0 +1,18 @@
+---
+- name: Install git and clone repo
+  hosts: all
+  become: yes
+
+
+  tasks:
+    - name: install git
+      yum:
+        name: git
+        state: present
+     
+    - name: Clone repository
+      git:
+        repo: https://github.com/The-Olatunji/AltSchool-Assignment3.git
+        dest: /home/vagrant/wp-pusher
+
+    

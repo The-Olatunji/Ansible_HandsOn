@@ -1,0 +1,18 @@
+
+
+- name: add some file to the webpage
+    command: echo "This is a new ansible handled webserver" > /var/www/html/index.html
+    when: ansible_distribution == 'CentOS'
+
+    - name: install apache web server 
+    apt:
+      name: apache2
+      state: latest
+    when: ansible_distribution == 'Ubuntu'
+
+  - name: add some file to the webpage
+    command: echo "<h1> This is a new ansible handled webserver<h1>" > /var/www/html/index.html
+    become: yes
+    become_method: sudo
+
+  
